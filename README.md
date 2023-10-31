@@ -24,7 +24,6 @@ Pin Number	Pin Name	Description
 4×4 Matrix Keypad Module Hardware Overview
 These Keypad modules are made of thin, flexible membrane material. The 4 x4 keypad module consists of 16 keys, these Keys are organized in a matrix of rows and columns. All these switches are connected to each other with a conductive trace. Normally there is no connection between rows and columns. When we will press a key, then a row and a column make contact.
 
-## Procedure : 
  ## LCD 16X2 
    16×2 LCD is named so because; it has 16 Columns and 2 Rows. There are a lot of combinations available like,
    8×1, 8×2, 10×2, 16×1, etc. But the most used one is the 16*2 LCD, hence we are using it here.
@@ -49,136 +48,57 @@ There are some preset commands instructions in LCD, which we need to send to LCD
 
 Hex Code
 
-Command to LCD Instruction Register
+Clear display screen - 01
 
-0F
+Return home - 02
 
-LCD ON, cursor ON
+Decrement cursor (shift cursor to left) - 04
 
-01
+Increment cursor (shift cursor to right) - 06
 
-Clear display screen
+Shift display right - 05
 
-02
+Shift display left -07
 
-Return home
+Display ON, cursor blinking - 0E
 
-04
+Force cursor to beginning of first line - 80
 
-Decrement cursor (shift cursor to left)
+Force cursor to beginning of second line - C0
 
-06
+2 lines and 5×7 matrix - 38
 
-Increment cursor (shift cursor to right)
+Cursor line 1 position 3 - 0,2
 
-05
+Display OFF, cursor OFF - 08
 
-Shift display right
+Jump to second line, position 1 - C1
 
-07
+Display ON, cursor OFF - 0C
 
-Shift display left
-
-0E
-
-Display ON, cursor blinking
-
-80
-
-Force cursor to beginning of first line
-
-C0
-
-Force cursor to beginning of second line
-
-38
-
-2 lines and 5×7 matrix
-
-83
-
-Cursor line 1 position 3
-
-3C
-
-Activate second line
-
-08
-
-Display OFF, cursor OFF
-
-C1
-
-Jump to second line, position 1
-
-OC
-
-Display ON, cursor OFF
-
-C1
-
-Jump to second line, position 1
-
-C2
-
-Jump to second line, position 2
+Jump to second line, position 2 - C2
  
 ## Procedure:
- 1. click on STM 32 CUBE IDE, the following screen will appear 
- <img src="https://user-images.githubusercontent.com/36288975/226189166-ac10578c-c059-40e7-8b80-9f84f64bf088.png" width=450 height=450>
 
- 2. click on FILE, click on new stm 32 project 
-<img src="https://user-images.githubusercontent.com/36288975/226189215-2d13ebfb-507f-44fc-b772-02232e97c0e3.png" width=450 height=450>
-<img src="https://user-images.githubusercontent.com/36288975/226189230-bf2d90dd-9695-4aaf-b2a6-6d66454e81fc.png" width=450 height=450>
-<br>
-3. select the target to be programmed  as shown below and click on next 
-<br>
-<img src="https://user-images.githubusercontent.com/36288975/226189280-ed5dcf1d-dd8d-43ae-815d-491085f4863b.png" width=450 height=450>
-<br>
-4.select the program name
-<br>
-<img src="https://user-images.githubusercontent.com/36288975/226189316-09832a30-4d1a-4d4f-b8ad-2dc28f137711.png" width=450 height=450>
+1.Select a new STM32 Project.
 
-<br>
-5. corresponding ioc file will be generated automatically <br>
-<img src="https://user-images.githubusercontent.com/36288975/226189378-3abbdee2-0df6-470f-a3cd-79c74e3d3ad8.png" width=450 height=450>
-<br>
-6.select the appropriate pins as gipo, in or out, USART or required options and configure <br>
-<img src="https://user-images.githubusercontent.com/36288975/226189403-f7179f1a-3eae-4637-826b-ab4ec35ba1e1.png" width=450 height=450><br>
-<img src="https://user-images.githubusercontent.com/36288975/226189425-2b2414ce-49b3-4b61-a260-c658cb2e4152.png" width=450 height=450><br>
+2.Select GPIO Ports
+```
+  PC0 , PC1 , PC2 , PC3 , PA0 , PA1 , PA2 , PA3 , PB0 , PB1  -> Output
 
+  PC4 , PC5 , PC7 , PC8  -> Input
+```
+3.Configure the Input Ports at Pull up Mode followed by generating the code.
 
-7.click on cntrl+S , automaticall C program will be generated <br>
-<img src="https://user-images.githubusercontent.com/36288975/226189443-8b43451d-0b14-47e4-a20b-cc09c6ad8458.png" width=450 height=450><br>
-<img src="https://user-images.githubusercontent.com/36288975/226189450-85ffa969-2ffb-4788-81e5-72d60fdda0f1.png" width=450 height=450><br>
-8. edit the program and as per required <br>
-<img src="https://user-images.githubusercontent.com/36288975/226189461-a573e62f-a109-4631-a250-a20925758fe0.png" width=450 height=450><br>
+4.Build Debug and Create 'hex.file'.
 
-9. Add necessary library files of LCD 16x2 , write the program and use project and build  <br>
+5.Open a new Proteus Project.
 
-<img src="https://user-images.githubusercontent.com/36288975/226189554-3f7101ac-3f41-48fc-abc7-480bd6218dec.png" width=450 height=450><br>
-10. once the project is bulild <br>
-<img src="https://user-images.githubusercontent.com/36288975/226189577-c61cc1eb-3990-4968-8aa6-aefffc766b70.png" width=450 height=450><br>
+6.Select STM32F401RB, LCD 16*2 and Keypad.
 
-11. click on debug option <br>
-<img src="https://user-images.githubusercontent.com/36288975/226189625-37daa9a3-62e9-42b5-a5ce-2ac63345905b.png" width=450 height=450><br>
+7.Connect PA0 to D7 , PA1 to D6 , PA2 to D5 , PA3 to D4 , PB0 to RS , PB1 to E , PC0 to r1 , PC1 to r2 , PC2 to r3 , PC3 to r4 , PC4 to c1 , PC5 to c2 , PC6 to c3 and PC7 to c4.
 
-
-12.  Creating Proteus project and running the simulation<br>
-We are now at the last part of step by step guide on how to simulate STM32 project in Proteus.<br>
-
-13. Create a new Proteus project and place STM32F40xx i.e. the same MCU for which the project was created in STM32Cube IDE. <br>
-14. After creation of the circuit as per requirement as shown below <br>
-
-<img src="https://user-images.githubusercontent.com/36288975/233856847-32bea88a-565f-4e01-9c7e-4f7ed546ddf6.png" width=450 height=450><br>
-
-14. Double click on the the MCU part to open settings. Next to the Program File option, give full path to the Hex file generated using STM32Cube IDE. Then set the external crystal frequency to 8M (i.e. 8 MHz). Click OK to save the changes.<br>
-https://engineeringxpert.com/wp-content/uploads/2022/04/26.png<br>
-
-15. click on debug and simulate using simulation as shown below <br>
-
-<img src="https://user-images.githubusercontent.com/36288975/233856904-99eb708a-c907-4595-9025-c9dbd89b8879.png" width=450 height=450><br>
-
+8.Check the execution of the output using Run Option.
 
 ## STM 32 CUBE PROGRAM :
 
